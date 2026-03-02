@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, JetBrains_Mono } from "next/font/google"; // Swapped Geist_Mono for JetBrains_Mono
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/providers";
 
-const geistSans = Geist({
-    variable: "--font-geist-sans",
+// Load Inter for Sans
+const inter = Inter({
+    variable: "--font-sans",
     subsets: ["latin"]
 });
 
-// Configure the new Monospace font
-const cascadiaAlternative = JetBrains_Mono({
-    variable: "--font-cascadia",
+// Load JetBrains Mono for Mono
+const jetBrainsMono = JetBrains_Mono({
+    variable: "--font-mono",
     subsets: ["latin"]
 });
 
@@ -26,8 +27,8 @@ export default function RootLayout({
 }>) {
     return (
         <html lang='en' suppressHydrationWarning>
-            {/* Added the new variable to the body class */}
-            <body className={`  ${cascadiaAlternative.variable} antialiased`}>
+            {/* Apply both font variables to the body */}
+            <body className={`${inter.variable} ${jetBrainsMono.variable} antialiased`}>
                 <Providers>{children}</Providers>
             </body>
         </html>
