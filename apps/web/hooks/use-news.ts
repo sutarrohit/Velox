@@ -1,15 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
-import { newsApi } from "@/lib/api";
+import { newsApi } from "@/lib/apis/news/news-api";
 import type { NewsCategory } from "@/types";
 
-export function useNews(
-  category: NewsCategory = "general",
-  page: number = 1,
-  limit: number = 20,
-) {
+interface UseNewsParams {
+  category?: NewsCategory;
+  page?: number;
+  limit?: number;
+}
+
+export function useNews({
+  category = "general",
+  page = 1,
+  limit = 20,
+}: UseNewsParams = {}) {
   return useQuery({
     queryKey: ["news", category, page, limit],
-    queryFn: () => newsApi.getNews(category, page, limit),
+    queryFn: () => newsApi.getNews({ category, page, limit }),
     staleTime: 5 * 60 * 1000,
   });
 }
