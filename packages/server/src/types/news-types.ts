@@ -20,6 +20,10 @@ export const ArticleSummarySchema = z.object({
     oneLineSummary: z.string()
 });
 
+export type NewsArticle = z.infer<typeof NewsArticleSchema>;
+export type ArticleSummary = z.infer<typeof ArticleSummarySchema>;
+export type ChatMessage = z.infer<typeof ChatMessageSchema>;
+
 export const ChatMessageSchema = z.object({
     role: z.enum(["user", "assistant"]),
     content: z.string()
