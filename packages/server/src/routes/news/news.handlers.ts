@@ -1,6 +1,5 @@
-import type { NewsArticleSchema } from "@/types/news-types.js";
+import type { NewsArticle, NewsArticleSchema } from "@/types/news-types.js";
 import { cacheService } from "@/services/cache.js";
-import { z } from "@hono/zod-openapi";
 import env from "env.js";
 import { AppRouteHandler } from "@/lib/types.js";
 import type { companyNews, news, newsDetail } from "./news.route.js";
@@ -9,8 +8,6 @@ import axios from "axios";
 
 const FINNHUB_API_URL = "https://finnhub.io/api/v1";
 const FINNHUB_API_KEY = env.FINNHUB_API_KEY;
-
-type NewsArticle = z.infer<typeof NewsArticleSchema>;
 
 export const getMarketNews: AppRouteHandler<news> = async (c) => {
     const { category, page, limit } = c.req.valid("query");

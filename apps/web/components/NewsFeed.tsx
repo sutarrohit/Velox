@@ -7,6 +7,7 @@ import { NewsCategory } from "@/types";
 import { AlertCircle, Loader2 } from "lucide-react";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import { getNewsOptions } from "@/lib/apis/news/news-queries";
+import { CategoryFilter } from "./CategoryFilter";
 
 const NewsFeed = () => {
     const [category, setCategory] = useState<NewsCategory>("general");
@@ -29,9 +30,10 @@ const NewsFeed = () => {
     );
 
     return (
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 mt-10 border'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 mt-10 flex flex-col gap-4'>
+            <CategoryFilter activeCategory={category} onSelectCategory={setCategory} />
             {error && (
-                <div className='bg-bg-panel border border-accent-red rounded p-4 flex items-center text-accent-red mb-6 font-mono text-sm'>
+                <div className='border rounded p-4 flex items-center text-accent-red mb-6 font-mono text-sm'>
                     <AlertCircle className='h-4 w-4 mr-3' />
                     <p>ERR_FETCH_FAILED: Unable to load news stream.</p>
                 </div>
