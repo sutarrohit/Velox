@@ -28,7 +28,7 @@ export const chat = createRoute({
 
 export const summarize = createRoute({
     tags: ["chat"],
-    method: "get",
+    method: "post",
     path: "/summarize",
     request: {
         body: jsonContentRequired(
