@@ -10,7 +10,7 @@ export default function Home() {
 
     return (
         <div className='flex min-h-screen items-center justify-center'>
-            <main className='flex flex-col min-h-screen w-full border border-yellow-500'>
+            <main className='flex flex-col min-h-screen w-full'>
                 <HydrationBoundary state={dehydrate(queryClient)}>
                     <Header />
                     <div className='border flex flex-start'>
