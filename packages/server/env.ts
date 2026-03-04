@@ -15,6 +15,7 @@ const EnvSchema = z.object({
     FRONTEND_URL: z.string().url().default("http://localhost:3000"),
     FINNHUB_API_KEY: z.string(),
     LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace", "silent"]),
+    GEMINI_API_KEY: z.string(),
     DATABASE_URL: z.url(),
     DIRECT_URL: z.url()
 });

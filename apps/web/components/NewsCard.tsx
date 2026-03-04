@@ -31,17 +31,17 @@ export function NewsCard({ article, category }: { article: NewsArticle; category
                     <CardTitle>
                         <p className='flex justify-between w-full'>
                             <span
-                                className={`font-bold text-xs uppercase tracking-widest ${getCategoryColor(article.category)}`}
+                                className={`font-bold text-sm uppercase tracking-widest ${getCategoryColor(article.category)}`}
                             >
                                 {article?.category}
                             </span>
-                            <span className='text-[10px] text-ring uppercase'>{article?.source}</span>
+                            <span className='text-xs text-ring uppercase'>{article?.source}</span>
                         </p>
                     </CardTitle>
                 </CardHeader>
                 <CardContent className='flex flex-col flex-1'>
                     <div className='flex flex-col flex-1 gap-4'>
-                        <p className='text-sm font-medium line-clamp-3 leading-snug'>{article?.summary}</p>
+                        <p className='text-sm font-medium line-clamp-3 leading-snug'>{article?.headline}</p>
                         <div className='flex justify-between items-center mt-auto pt-3 border-t border-border-subtle/50 w-full'>
                             <span className='text-[10px] font-mono text-sidebar-ring'>{timeAgo(article.datetime)}</span>
                             <div className='flex items-center space-x-1'>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, Inconsolata } from "next/font/google";
 import "./globals.css";
 import Providers from "@/providers";
 
@@ -9,8 +9,8 @@ const inter = Inter({
     subsets: ["latin"]
 });
 
-// Load JetBrains Mono for Mono
-const jetBrainsMono = JetBrains_Mono({
+// Load Inconsolata for Mono
+const inconsolata = Inconsolata({
     variable: "--font-mono",
     subsets: ["latin"]
 });
@@ -27,8 +27,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang='en' suppressHydrationWarning>
-            {/* Apply both font variables to the body */}
-            <body className={`${inter.variable} ${jetBrainsMono.variable} antialiased`}>
+            <body className={`${inter.variable} ${inconsolata.variable} antialiased`}>
                 <Providers>{children}</Providers>
             </body>
         </html>
