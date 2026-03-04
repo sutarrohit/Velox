@@ -1,15 +1,12 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { ArticleSummary, ChatMessage, NewsArticle } from "@/types/news-types.js";
+import env from "env.js";
 
 let aiClient: GoogleGenAI | null = null;
 
 function getAI(): GoogleGenAI {
     if (!aiClient) {
-        const key = "";
-        if (!key) {
-            throw new Error("GEMINI_API_KEY environment variable is required");
-        }
-        aiClient = new GoogleGenAI({ apiKey: key });
+        aiClient = new GoogleGenAI({ apiKey: env.GEMINI_API_KEY });
     }
     return aiClient;
 }
@@ -40,7 +37,7 @@ URL: ${article.url}`;
 
         try {
             const response = await ai.models.generateContent({
-                model: "gemini-3-flash-preview",
+                model: "gemini-2.5-flash-lite",
                 contents: prompt,
                 config: {
                     responseMimeType: "application/json",

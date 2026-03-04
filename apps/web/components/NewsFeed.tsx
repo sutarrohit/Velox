@@ -30,7 +30,7 @@ const NewsFeed = () => {
     );
 
     return (
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 mt-10 flex flex-col gap-4'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 mt-8 flex flex-col gap-4'>
             <CategoryFilter activeCategory={category} onSelectCategory={setCategory} />
             {error && (
                 <div className='border rounded p-4 flex items-center text-accent-red mb-6 font-mono text-sm'>
