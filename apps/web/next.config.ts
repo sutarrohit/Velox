@@ -4,7 +4,12 @@ const nextConfig: NextConfig = {
     /* config options here */
     reactCompiler: true,
     images: {
-        remotePatterns: [new URL("https://static2.finnhub.io/**")]
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "**"
+            }
+        ]
     }
 };
 
