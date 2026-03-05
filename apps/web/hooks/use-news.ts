@@ -23,7 +23,7 @@ export function useNews({
 export function useNewsDetail(id: string) {
   return useQuery({
     queryKey: ["news", "detail", id],
-    queryFn: () => newsApi.getNewsDetail(id),
+    queryFn: () => newsApi.getNewsDetail({ id }),
     staleTime: 5 * 60 * 1000,
     enabled: !!id,
   });
@@ -32,7 +32,7 @@ export function useNewsDetail(id: string) {
 export function useCompanyNews(symbol: string, days: number = 7) {
   return useQuery({
     queryKey: ["company-news", symbol, days],
-    queryFn: () => newsApi.getCompanyNews(symbol, days),
+    queryFn: () => newsApi.getCompanyNews({ symbol, days }),
     staleTime: 5 * 60 * 1000,
     enabled: !!symbol,
   });

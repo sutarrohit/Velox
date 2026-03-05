@@ -1,9 +1,40 @@
 import ArticleDetail from "@/components/Article/ArticleDetail";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { getQueryClient } from "@/lib/getQueryClient";
+import { getNewsOptions } from "@/lib/apis/news/news-queries";
+import type { NewsArticle } from "@/types";
+
+async function getArticleData(id: string): Promise<NewsArticle | null> {
+    const queryClient = getQueryClient();
+
+    const categories = ["general", "forex", "crypto", "merger"] as const;
+
+    for (const category of categories) {
+        await queryClient.prefetchInfiniteQuery(getNewsOptions({ category, limit: 100 }));
+    }
+
+    for (const category of categories) {
+        const data = queryClient.getQueryData<{ pages: { data: NewsArticle[] }[] }>(
+            getNewsOptions({ category }).queryKey
+        );
+
+        if (data?.pages) {
+            for (const page of data.pages) {
+                const article = page.data.find((a: NewsArticle) => a.id === id);
+                if (article) {
+                    return article;
+                }
+            }
+        }
+    }
+
+    return null;
+}
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
+    const article = await getArticleData(id);
 
     return (
         <div className='flex min-h-screen items-center justify-center'>
@@ -22,10 +53,10 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
                     </header>
                 </div>
 
-                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 size-full items-center border grid grid-cols-3 flex-1 gap-4'>
-                    <ArticleDetail />
-                    <ArticleDetail />
-                    <ArticleDetail />
+                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 size-full items-center border grid grid-cols-2 flex-1 gap-4 py-8'>
+                    <ArticleDetail article={article} />
+                    <ArticleDetail article={article} />
+                    {/* <ArticleDetail article={article} /> */}
                 </div>
             </main>
         </div>
