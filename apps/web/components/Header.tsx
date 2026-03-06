@@ -8,7 +8,7 @@ export default function Header() {
                     <div className='flex items-center space-x-3'>
                         <Activity className='w-5 h-5 text-primary' />
                         <span className='text-[18px] font-mono font-bold tracking-widest uppercase text-text-primary'>
-                            FinanceHub
+                            VELOX
                         </span>
                     </div>
                     <nav className='hidden sm:flex space-x-6 text-sm font-bold'>

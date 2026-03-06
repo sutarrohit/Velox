@@ -23,3 +23,16 @@ export interface PaginatedResponse<T> {
 }
 
 export type NewsCategory = "general" | "forex" | "crypto" | "merger";
+
+export interface ArticleSummary {
+  bullets: string[];
+  sentiment: "bullish" | "bearish" | "neutral";
+  sentimentReason: string;
+  keyTickers: string[];
+  oneLineSummary: string;
+}
+
+export interface ChatMessage {
+  role: "user" | "assistant";
+  content: string;
+}
