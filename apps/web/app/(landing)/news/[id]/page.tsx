@@ -47,22 +47,19 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
                         <div className='max-w-8xl mx-auto px-4 sm:px-6 lg:px-18 h-14 flex items-center'>
                             <Link
                                 href='/'
-                                className='inline-flex items-center text-sm font-mono hover:text-primary font-bold transition-colors group uppercase tracking-wider'
+                                className='inline-flex items-center text-sm font-mono hover:text-chart-1 font-bold transition-colors group uppercase tracking-wider'
                             >
-                                <ArrowLeft className='w-4 h-4 mr-2 text-text-muted group-hover:text-text-primary transition-colors' />
+                                <ArrowLeft className='w-4 h-4 mr-2 text-text-muted group-hover:text-text-chart-1 transition-colors' />
                                 Back to Feed
                             </Link>
                         </div>
                     </header>
                 </div>
 
-                <div className='max-w-8xl mx-auto px-4 sm:px-6 lg:px-18 size-full items-center border grid grid-cols-1 xl:grid-cols-3 flex-1 gap-4 py-8'>
+                <div className='@container max-w-8xl mx-auto px-4 sm:px-6 lg:px-18 size-full items-center  grid grid-cols-1 xl:grid-cols-3 flex-1 gap-4 py-8'>
                     <ArticleDetail article={article} />
                     <Analysis article={article} />
-
-                    <div className='h-full overflow-hidden flex flex-col'>
-                        <AIChat article={article!} />
-                    </div>
+                    <AIChat article={article!} />
                 </div>
             </main>
         </div>

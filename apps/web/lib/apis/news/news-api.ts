@@ -7,6 +7,13 @@ interface GetNewsParams {
   limit?: number;
 }
 
+export class RateLimitError extends Error {
+  constructor(message = "Too many requests. Please try again later.") {
+    super(message);
+    this.name = "RateLimitError";
+  }
+}
+
 export const newsApi = {
   getNews: async ({
     category = "general",
@@ -17,6 +24,8 @@ export const newsApi = {
       query: { category, page, limit },
     });
 
+    if (response.status === 429)
+      throw new RateLimitError("Too many requests. Please try again later.");
     if (!response.ok) throw new Error("Failed to fetch news");
     return response.json() as Promise<PaginatedResponse<NewsArticle>>;
   },

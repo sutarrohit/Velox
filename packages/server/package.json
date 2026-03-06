@@ -25,6 +25,7 @@
         "hono": "^4.11.9",
         "hono-openapi": "^1.2.0",
         "hono-pino": "^0.10.3",
+        "hono-rate-limiter": "^0.5.3",
         "node-cache": "^5.1.2",
         "pg": "^8.18.0",
         "pino": "^10.3.1",
