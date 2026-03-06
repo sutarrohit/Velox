@@ -28,7 +28,7 @@ const ArticleDetail = ({ article }: ArticleDetailProps) => {
                 </div>
 
                 <div className='absolute bottom-0 z-20 flex flex-col gap-3 p-4'>
-                    <Badge className='text-sm font-bold uppercase px-2 py-2 text-chart-1 bg-chart-5/50 border border-primary/50'>
+                    <Badge className='text-sm font-bold uppercase p-[12px] text-chart-1 bg-chart-5/50 border border-primary/50 rounded'>
                         {article.category}
                     </Badge>
                     <h1 className='text-4xl line-clamp-3 tracking-tight font-bold'>{article.headline}</h1>
@@ -57,7 +57,7 @@ const ArticleDetail = ({ article }: ArticleDetailProps) => {
                     href={article.url}
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='inline-flex items-center justify-center w-full sm:w-auto px-4 py-2 border text-sm bg-black hover:bg-gray-900 transition-all focus:outline-none border-gray-600 uppercase tracking-wider group'
+                    className='rounded inline-flex items-center justify-center w-full sm:w-auto px-4 py-2 border text-sm bg-black hover:bg-gray-900 transition-all focus:outline-none border-gray-600 uppercase tracking-wider group'
                 >
                     Read Full Article on {article.source}
                     <ExternalLink className='max-w-4 h-4 ml-2  group-hover:text-primary transition-colors' />

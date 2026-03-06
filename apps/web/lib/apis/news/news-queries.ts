@@ -16,8 +16,12 @@ export function getNewsOptions({ category = "general", limit = 20 }: GetNewsPara
         getNextPageParam: (lastPage) => {
             const { page, totalPages } = lastPage.meta;
 
-            return page < totalPages ? page + 1 : undefined;
-        }
+            if (page >= totalPages) return undefined;
+            return page + 1;
+        },
+        retry: 2,
+        retryOnMount: false,
+        retryDelay: 5 * 60 * 1000
     });
 }
 

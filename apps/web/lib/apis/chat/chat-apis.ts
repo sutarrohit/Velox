@@ -1,6 +1,13 @@
 import { NewsArticle } from "@/types";
 import { client } from "../../honoClient";
 
+export class RateLimitError extends Error {
+    constructor(message = "Rate limit exceeded. Please try again later.") {
+        super(message);
+        this.name = "RateLimitError";
+    }
+}
+
 export const chatApis = {
     summarizeArticle: async (article: NewsArticle) => {
         const response = await client.api.v1.summarize.$post({
@@ -12,11 +19,11 @@ export const chatApis = {
             }
         });
 
-        console.log("================================================== dkj", response);
-
+        if (response.status === 429) throw new RateLimitError("Rate limit exceeded. Please try again later.");
         if (!response.ok) throw new Error("Failed to summarize article");
         return response.json();
     },
+
     newChat: async (article: NewsArticle, message: string[]) => {
         const response = await client.api.v1.chat.$post({
             json: {
@@ -25,8 +32,9 @@ export const chatApis = {
             }
         });
 
+        if (response.status === 429)
+            throw new RateLimitError("Rate limit exceeded. You can only send 15 messages per hour.");
         if (!response.ok) throw new Error("Failed to fetch create chat");
-        console.log(response.json());
         return response.json() as Promise<string>;
     }
 };

@@ -21,10 +21,8 @@ export function CategoryFilter({ activeCategory, onSelectCategory }: CategoryFil
                     key={cat.id}
                     onClick={() => onSelectCategory(cat.id as NewsCategory)}
                     className={cn(
-                        "cursor-pointer px-3 py-1.5 text-sm font-bold uppercase tracking-wider whitespace-nowrap transition-colors border",
-                        activeCategory === cat.id
-                            ? "bg-primary-foreground/50 text-primary border-primary/30"
-                            : "text-ring hover:border-ring bg-secondary/30"
+                        "cursor-pointer px-3 py-1.5 text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-colors border rounded-sm",
+                        activeCategory === cat.id ? "bg-primary/40 text-chart-1" : "bg-muted sidebar-ring"
                     )}
                 >
                     {cat.label}

@@ -9,11 +9,11 @@ export default function Home() {
     void queryClient.prefetchInfiniteQuery(getNewsOptions());
 
     return (
-        <div className='flex min-h-screen items-center justify-center'>
+        <div className='relative flex min-h-screen items-center justify-center'>
             <main className='flex flex-col min-h-screen w-full'>
+                <Header />
                 <HydrationBoundary state={dehydrate(queryClient)}>
-                    <Header />
-                    <div className='border flex flex-start'>
+                    <div className='flex flex-start'>
                         <NewsFeed />
                     </div>
                 </HydrationBoundary>

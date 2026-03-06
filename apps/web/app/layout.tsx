@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Inconsolata } from "next/font/google";
 import "./globals.css";
 import Providers from "@/providers";
+import { cn } from "@/lib/utils";
 
 // Load Inter for Sans
 const inter = Inter({
@@ -26,7 +27,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang='en' suppressHydrationWarning>
+        <html lang='en' suppressHydrationWarning className={cn("font-sans", inter.variable)}>
             <body className={`${inter.variable} ${inconsolata.variable} antialiased`}>
                 <Providers>{children}</Providers>
             </body>
