@@ -1,10 +1,8 @@
-import React from "react";
 import type { NewsArticle } from "@/types";
 import Image from "next/image";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Clock, ExternalLink, Globe } from "lucide-react";
 import { timeAgo } from "@/lib/utils";
 
@@ -13,9 +11,8 @@ interface ArticleDetailProps {
 }
 
 const ArticleDetail = ({ article }: ArticleDetailProps) => {
-    if (!article) {
-        return <div className='flex flex-1 w-full h-full border '>Article not found</div>;
-    }
+    if (!article)
+        return <div className='flex flex-1 w-full h-full items-center justify-center border'>Article not found</div>;
 
     return (
         <Card className='relative mx-auto w-full pt-0 h-full border'>

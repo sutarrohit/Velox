@@ -4,6 +4,9 @@ import Link from "next/link";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { getNewsOptions } from "@/lib/apis/news/news-queries";
 import type { NewsArticle } from "@/types";
+import Analysis from "@/components/Article/Analysis";
+
+import AIChat from "@/components/AIChat";
 
 async function getArticleData(id: string): Promise<NewsArticle | null> {
     const queryClient = getQueryClient();
@@ -38,10 +41,10 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
     return (
         <div className='flex min-h-screen items-center justify-center'>
-            <main className='flex flex-col  min-h-screen w-full border border-pink-400'>
+            <main className='flex flex-col  min-h-screen w-full'>
                 <div className='h-fit w-full'>
                     <header className=' border-b border-strong sticky top-0 z-30'>
-                        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center'>
+                        <div className='max-w-8xl mx-auto px-4 sm:px-6 lg:px-18 h-14 flex items-center'>
                             <Link
                                 href='/'
                                 className='inline-flex items-center text-sm font-mono hover:text-primary font-bold transition-colors group uppercase tracking-wider'
@@ -53,10 +56,13 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
                     </header>
                 </div>
 
-                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 size-full items-center border grid grid-cols-2 flex-1 gap-4 py-8'>
+                <div className='max-w-8xl mx-auto px-4 sm:px-6 lg:px-18 size-full items-center border grid grid-cols-1 xl:grid-cols-3 flex-1 gap-4 py-8'>
                     <ArticleDetail article={article} />
-                    <ArticleDetail article={article} />
-                    {/* <ArticleDetail article={article} /> */}
+                    <Analysis article={article} />
+
+                    <div className='h-full overflow-hidden flex flex-col'>
+                        <AIChat article={article!} />
+                    </div>
                 </div>
             </main>
         </div>

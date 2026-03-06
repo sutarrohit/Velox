@@ -91,7 +91,7 @@ URL: ${article.url}`;
         }
     }
 
-    async chatAboutArticle(article: NewsArticle, messages: ChatMessage[]): Promise<string> {
+    async *chatStreamAboutArticle(article: NewsArticle, messages: ChatMessage[]) {
         const ai = getAI();
 
         const systemInstruction = `You are a helpful financial analyst. The user is reading the following news article and has questions about it.
@@ -107,17 +107,49 @@ Answer questions clearly and concisely. Be factual. If asked for investment advi
                 fullPrompt += `${msg.role === "user" ? "User" : "Assistant"}: ${msg.content}\n`;
             }
 
-            const response = await ai.models.generateContent({
-                model: "gemini-3-flash-preview",
+            const response = await ai.models.generateContentStream({
+                model: "gemini-2.5-flash-lite",
                 contents: systemInstruction + "\n\nConversation:\n" + fullPrompt + "\nAssistant:"
             });
 
-            return response.text || "I'm sorry, I couldn't generate a response.";
+            for await (const chunk of response) {
+                if (chunk.text) {
+                    yield chunk.text;
+                }
+            }
         } catch (error) {
-            console.error("Error chatting with Gemini:", error);
-            return "I'm sorry, I encountered an error while processing your request.";
+            console.error("Error streaming with Gemini:", error);
+            yield "I'm sorry, I encountered an error while processing your request.";
         }
     }
+
+    //     async chatAboutArticle(article: NewsArticle, messages: ChatMessage[]): Promise<string> {
+    //         const ai = getAI();
+
+    //         const systemInstruction = `You are a helpful financial analyst. The user is reading the following news article and has questions about it.
+
+    // Article: ${article.headline}
+    // ${article.summary}
+
+    // Answer questions clearly and concisely. Be factual. If asked for investment advice, remind the user this is not financial advice. Keep responses under 150 words unless the question requires more detail.`;
+
+    //         try {
+    //             let fullPrompt = "";
+    //             for (const msg of messages) {
+    //                 fullPrompt += `${msg.role === "user" ? "User" : "Assistant"}: ${msg.content}\n`;
+    //             }
+
+    //             const response = await ai.models.generateContent({
+    //                 model: " gemini-2.5-flash-lite",
+    //                 contents: systemInstruction + "\n\nConversation:\n" + fullPrompt + "\nAssistant:"
+    //             });
+
+    //             return response.text || "I'm sorry, I couldn't generate a response.";
+    //         } catch (error) {
+    //             console.error("Error chatting with Gemini:", error);
+    //             return "I'm sorry, I encountered an error while processing your request.";
+    //         }
+    //     }
 }
 
 export const geminiService = new GeminiService();
