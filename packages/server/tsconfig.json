@@ -13,6 +13,6 @@
         "types": ["bun", "node"]
     },
 
-    "include": ["src"],
+    "include": ["src", "lambda", "infra"],
     "exclude": ["node_modules", "dist"]
 }

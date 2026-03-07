@@ -46,6 +46,19 @@
     "generate": {
       "dependsOn": ["^generate"],
       "cache": false
+    },
+    "cdk:deploy": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "cdk:synth": {
+      "cache": false
+    },
+    "cdk:diff": {
+      "cache": false
+    },
+    "cdk:destroy": {
+      "cache": false
     }
   }
 }
