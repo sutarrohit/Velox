@@ -1,6 +1,6 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import { ArticleSummary, ChatMessage, NewsArticle } from "@/types/news-types.js";
-import env from "env.js";
+import { ArticleSummary, ChatMessage, NewsArticle } from "../types/news-types.js";
+import env from "../../env.js";
 
 let aiClient: GoogleGenAI | null = null;
 

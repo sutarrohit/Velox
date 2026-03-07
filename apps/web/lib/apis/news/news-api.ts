@@ -24,7 +24,7 @@ export const newsApi = {
       query: { category, page, limit },
     });
 
-    if (response.status === 429)
+    if ((response.status as number) === 429)
       throw new RateLimitError("Too many requests. Please try again later.");
     if (!response.ok) throw new Error("Failed to fetch news");
     return response.json() as Promise<PaginatedResponse<NewsArticle>>;

@@ -1,5 +1,5 @@
 import { rateLimiter } from "hono-rate-limiter";
-import { AppBinding } from "@/lib/types.js";
+import { AppBinding } from "../lib/types.js";
 
 const chatRateLimiter = rateLimiter<AppBinding>({
     windowMs: 60 * 60 * 1000, // 1 hour
