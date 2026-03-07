@@ -1,9 +1,9 @@
-import { AppRouteHandler } from "@/lib/types.js";
+import { AppRouteHandler } from "../../lib/types.js";
 import type { chat, summarize } from "./chat.route.js";
-import { geminiService } from "@/services/gemini.js";
+import { geminiService } from "../../services/gemini.js";
 import * as HttpStatusCodes from "stoker/http-status-codes";
-import { cacheService } from "@/services/cache.js";
-import { ArticleSummary } from "@/types/news-types.js";
+import { cacheService } from "../../services/cache.js";
+import { ArticleSummary } from "../../types/news-types.js";
 
 export const userChat: AppRouteHandler<chat> = async (c) => {
     const { article, message } = c.req.valid("json");

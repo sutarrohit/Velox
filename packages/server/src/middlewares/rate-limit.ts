@@ -1,5 +1,5 @@
 import { rateLimiter } from "hono-rate-limiter";
-import { AppBinding } from "@/lib/types.js";
+import { AppBinding } from "../lib/types.js";
 
 const limiter = rateLimiter<AppBinding>({
     windowMs: 15 * 60 * 1000, // 15 minutes

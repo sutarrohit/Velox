@@ -1,16 +1,14 @@
-import createApp from "@/lib/create-app.js";
-import { configureOpenAPI } from "@/lib/configure-open-api.js";
+import createApp from "./lib/create-app.js";
+import { configureOpenAPI } from "./lib/configure-open-api.js";
 import newsRouter from "./routes/news/news.index.js";
 import chatRoutes from "./routes/chat/chat.index.js";
 
 const app = createApp();
-const routes = [newsRouter, chatRoutes] as const;
 
 configureOpenAPI(app);
 
-routes.forEach((route) => {
-    app.route("/api/v1", route);
-});
+const appWithNews = app.route("/api/v1", newsRouter);
+const appWithAllRoutes = appWithNews.route("/api/v1", chatRoutes);
 
-export type AppType = typeof app;
-export default app;
+export type AppType = typeof appWithAllRoutes;
+export default appWithAllRoutes;

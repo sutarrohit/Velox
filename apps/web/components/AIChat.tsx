@@ -68,7 +68,7 @@ export default function AIChat({ article }: AIChatProps) {
         },
       });
 
-      if (response.status === 429) {
+      if ((response.status as number) === 429) {
         setMessages((prev) => {
           const newMessages = [...prev];
           const lastMessage = newMessages[newMessages.length - 1];

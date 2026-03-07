@@ -4,7 +4,7 @@ import {
   onError,
   pinoLogger,
   rateLimiter,
-} from "@/middlewares/index.js";
+} from "../middlewares/index.js";
 import { AppBinding } from "./types.js";
 import { defaultHook } from "stoker/openapi";
 import { cors } from "hono/cors";

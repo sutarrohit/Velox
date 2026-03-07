@@ -1,7 +1,7 @@
-import type { NewsArticle, NewsArticleSchema } from "@/types/news-types.js";
-import { cacheService } from "@/services/cache.js";
-import env from "env.js";
-import { AppRouteHandler } from "@/lib/types.js";
+import type { NewsArticle, NewsArticleSchema } from "../../types/news-types.js";
+import { cacheService } from "../../services/cache.js";
+import env from "../../../env.js";
+import { AppRouteHandler } from "../../lib/types.js";
 import type { companyNews, news, newsDetail } from "./news.route.js";
 import * as HttpStatusCodes from "stoker/http-status-codes";
 import axios from "axios";

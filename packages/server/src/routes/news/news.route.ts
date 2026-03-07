@@ -6,7 +6,7 @@ import {
   NewsArticleSchema,
   PaginationSchema,
   PaginatedResponseSchema,
-} from "@/types/news-types.js";
+} from "../../types/news-types.js";
 
 const NewsListResponseSchema = PaginatedResponseSchema(NewsArticleSchema);
 
