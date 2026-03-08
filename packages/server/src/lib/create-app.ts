@@ -8,7 +8,7 @@ import {
 import { AppBinding } from "./types.js";
 import { defaultHook } from "stoker/openapi";
 import { cors } from "hono/cors";
-import env from "../../env.js";
+import env from "../env.js";
 
 export function createRouter() {
   return new OpenAPIHono<AppBinding>({ strict: false, defaultHook });

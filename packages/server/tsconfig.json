@@ -1,21 +1,21 @@
 {
-    "extends": "@velox/typescript-config/base.json",
+  "extends": "@velox/typescript-config/base.json",
 
-    "compilerOptions": {
-        "rootDir": "./",
-        "outDir": "dist",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
 
-        "baseUrl": ".",
-        "paths": {
-            "@/*": ["./src/*"]
-        },
-
-        "types": ["bun", "node"]
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
     },
 
-    "include": ["src"],
-    "exclude": ["node_modules", "dist"],
-    "tsc-alias": {
-        "resolveFullPaths": true
-    }
+    "types": ["bun", "node"]
+  },
+
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts"],
+  "tsc-alias": {
+    "resolveFullPaths": true
+  }
 }
