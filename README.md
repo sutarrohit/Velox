@@ -1,135 +1,281 @@
-# Turborepo starter
+# Velox - AI-Powered Finance News Hub
 
-This Turborepo starter is maintained by the Turborepo core team.
+Velox is a modern finance web application that combines real-time market news with AI-powered summarization and interactive chat capabilities. Built as a unified platform to help users stay informed about financial markets without jumping between multiple services.
 
-## Using this example
+## Features
 
-Run the following command:
+- **Real-time Finance News** - Get the latest market news across categories (general, forex, crypto, merger)
+- **AI Summarization** - Automatically generate concise summaries with sentiment analysis for any article
+- **Interactive AI Chat** - Ask questions about specific articles and get AI-powered responses
+- **Company News** - Search news by stock ticker symbol
+- **Sentiment Analysis** - AI-powered bullish/bearish sentiment detection on articles
 
-```sh
-npx create-turbo@latest
-```
+## Tech Stack
 
-## What's inside?
+| Layer | Technology |
+|-------|------------|
+| Frontend | Next.js 14, React, TypeScript, Tailwind CSS |
+| Backend | Hono.js, AWS Lambda |
+| Database | PostgreSQL, Prisma ORM |
+| AI | Google Gemini API |
+| Data Provider | Finnhub API |
+| Infrastructure | AWS CDK |
+| Package Manager | Bun |
+| Monorepo | Turborepo |
 
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+## Project Structure
 
 ```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+velox/
+├── apps/
+│   └── web/                 # Next.js frontend application
+│       ├── app/             # App Router pages
+│       │   └── (landing)/  # Landing page routes
+│       ├── components/     # React components
+│       ├── hooks/          # Custom React hooks
+│       ├── lib/            # Utility functions
+│       └── providers/      # React context providers
+├── packages/
+│   ├── server/             # Backend API (AWS Lambda)
+│   │   ├── prisma/        # Database schema
+│   │   ├── src/
+│   │   │   ├── routes/    # API route handlers
+│   │   │   │   ├── news/  # News endpoints
+│   │   │   │   └── chat/  # AI chat endpoints
+│   │   │   ├── services/  # Business logic
+│   │   │   │   ├── cache.ts
+│   │   │   │   └── gemini.ts
+│   │   │   └── lib/        # Shared utilities
+│   │   ├── infra/         # AWS CDK infrastructure
+│   │   └── lambda/        # Lambda entry point
+│   ├── eslint-config/     # ESLint configuration
+│   └── typescript-config/ # TypeScript configuration
+└── turbo.json              # Turborepo configuration
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+## API Documentation
 
+### News Endpoints
+
+#### Get Market News
 ```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
+GET /news?category=general&page=1&limit=10
 ```
 
-### Develop
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| category | string | "general" | News category: general, forex, crypto, merger |
+| page | number | 1 | Page number |
+| limit | number | 10 | Items per page |
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+**Response:**
+```json
+{
+  "data": [
+    {
+      "id": "12345678",
+      "headline": "Market Update: Stocks Rise",
+      "summary": "...",
+      "source": "Reuters",
+      "url": "https://...",
+      "image": "https://...",
+      "datetime": 1699900000,
+      "category": "general",
+      "related": "AAPL,GOOGL"
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "limit": 10,
+    "total": 50,
+    "totalPages": 5
+  }
+}
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
+#### Get Article Details
 ```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
+GET /news/:id
 ```
 
-## Useful Links
+#### Get Company News
+```
+GET /ticker/AAPL?days=7
+```
 
-Learn more about the power of Turborepo:
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| symbol | path | Stock ticker symbol (e.g., AAPL, GOOGL) |
+| days | query | Number of days to look back (default: 7) |
 
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+### AI Chat Endpoints
+
+#### Chat About Article
+```
+POST /chat
+Content-Type: application/json
+
+{
+  "article": { ... },
+  "message": [
+    { "role": "user", "content": "What does this article mean?" }
+  ]
+}
+```
+
+Returns a streaming text response.
+
+#### Summarize Article
+```
+POST /summarize
+Content-Type: application/json
+
+{
+  "articleId": "12345678",
+  "headline": "Market Update",
+  "summary": "Full article summary...",
+  "url": "https://..."
+}
+```
+
+**Response:**
+```json
+{
+  "bullets": [
+    "Key point 1",
+    "Key point 2"
+  ],
+  "sentiment": "bullish",
+  "sentimentReason": "The article discusses positive market trends...",
+  "keyTickers": ["AAPL", "MSFT"],
+  "oneLineSummary": "Markets show positive momentum amid earnings reports"
+}
+```
+
+## Environment Variables
+
+Create a `.env` file in `packages/server/` with the following variables:
+
+| Variable | Description |
+|----------|-------------|
+| `NODE_ENV` | Environment (development, production) |
+| `PORT` | Server port (default: 4000) |
+| `FRONTEND_URL` | Frontend URL for CORS |
+| `FINNHUB_API_KEY` | API key from [Finnhub.io](https://finnhub.io/) |
+| `GEMINI_API_KEY` | API key from [Google AI Studio](https://aistudio.google.com/app/apikey) |
+| `DATABASE_URL` | PostgreSQL connection string |
+| `DIRECT_URL` | Direct database connection for Prisma |
+| `LOG_LEVEL` | Logging level (debug, info, warn, error, silent) |
+
+## Development Setup
+
+### Prerequisites
+
+- Node.js 18+
+- [Bun](https://bun.sh/) package manager
+- PostgreSQL database
+- Finnhub API key (free tier available)
+- Google Gemini API key
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd velox
+   ```
+
+2. **Install dependencies**
+   ```bash
+   bun install
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   cp packages/server/.env.example packages/server/.env
+   # Edit .env with your API keys and database URL
+   ```
+
+4. **Set up the database**
+   ```bash
+   # Generate Prisma client
+   bun run db:generate
+
+   # Run migrations
+   bun run db:migrate:dev
+
+   # (Optional) Seed database
+   bun run db:seed
+   ```
+
+5. **Start development servers**
+   ```bash
+   # Run all apps in development mode
+   bun run dev
+
+   # Or run specific apps:
+   bun run dev --filter=web     # Frontend only
+   bun run dev --filter=server  # Backend only
+   ```
+
+### Running the Application
+
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:4000
+
+### Running Tests
+
+```bash
+# Run all tests
+bun test
+
+# Run tests for server package
+cd packages/server && bun test
+```
+
+## Deployment
+
+The backend is deployed as an AWS Lambda function using AWS CDK. For detailed deployment instructions, see [packages/server/deploy.md](packages/server/deploy.md).
+
+### Quick Deploy
+
+```bash
+cd packages/server
+
+# Build the project
+bun run build
+
+# Deploy to AWS
+cdk deploy
+```
+
+## Contributing
+
+### Code Style
+
+- Use TypeScript for all new code
+- Follow ESLint configuration (run `bun run lint` before committing)
+- Use Prettier for formatting (run `bun run format` before committing)
+
+### Commit Messages
+
+Follow conventional commits:
+- `feat:` New feature
+- `fix:` Bug fix
+- `docs:` Documentation changes
+- `refactor:` Code refactoring
+- `test:` Adding/updating tests
+
+### Testing
+
+All new features should include tests. Run tests before submitting a PR:
+
+```bash
+bun run lint
+bun run check-types
+bun test
+```
+
+## License
+
+MIT
